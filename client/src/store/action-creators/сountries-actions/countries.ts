@@ -7,7 +7,7 @@ export const getCountriesAction = () => {
         try {
             dispatch({type: CountriesActionTypes.GET_COUNTRIES})
             const response = await CountriesDataService.getCountriesByPagination ();
-            dispatch({type: CountriesActionTypes.GET_COUNTRIES_SUCCESS, payload: response})
+            dispatch({type: CountriesActionTypes.GET_COUNTRIES_SUCCESS, payload: response.data})
         } catch (e) {
             if (e instanceof Error) {
                 console.log(e.message);

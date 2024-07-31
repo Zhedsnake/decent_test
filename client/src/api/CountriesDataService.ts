@@ -9,8 +9,7 @@ export default class CountriesDataService {
                 fields: name,
             }
         });
-        console.log(response.data);
-        return response.data;
+        return response;
     }
 
     // static async getStaffById(stuffId: string) {

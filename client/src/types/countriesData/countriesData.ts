@@ -1,3 +1,5 @@
 export interface CountriesData {
-    name: any
+    name: {
+        common: string
+    }
 }

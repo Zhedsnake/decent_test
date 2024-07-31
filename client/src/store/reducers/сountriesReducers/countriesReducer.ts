@@ -3,7 +3,11 @@ import {CountriesAction, CountriesActionTypes, CountriesState} from "../../../ty
 
 const initialState: CountriesState = {
     data: {
-        countries: []
+        countries: [
+            {
+                name: ''
+            }
+        ]
     },
     loading: false,
     error: null,

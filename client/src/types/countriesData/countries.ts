@@ -18,9 +18,7 @@ interface GetCountriesAction {
 }
 interface GetCountriesSuccessAction {
     type: CountriesActionTypes.GET_COUNTRIES_SUCCESS;
-    payload: {
-        data: CountriesData[];
-    };
+    payload: never[];
 }
 interface GetCountriesErrorAction {
     type: CountriesActionTypes.GET_COUNTRIES_ERROR;
