@@ -8,7 +8,7 @@ import Pagination from "../components/UI/pagination/Pagination.tsx";
 const Countries: React.FC = () => {
     const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
-    const [limit, setLimit] = useState<number>(10);
+    const limit: number = 10;
     const [startIndex, setStartIndex] = useState<number>(0)
 
     const {data, error: countriesError, loading: isCountriesLoading} = useTypedSelector(state => state.countries)

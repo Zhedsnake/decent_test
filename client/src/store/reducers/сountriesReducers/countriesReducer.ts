@@ -5,7 +5,9 @@ const initialState: CountriesState = {
     data: {
         countries: [
             {
-                name: ''
+                name: {
+                    common: ''
+                }
             }
         ]
     },
