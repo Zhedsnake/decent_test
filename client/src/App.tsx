@@ -1,14 +1,22 @@
 import React from 'react';
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
+import AppRouter from "./components/AppRouter";
 
 
-const App: React.FC  = () => {
+// Redux
+import { Provider } from 'react-redux';
+import store from "./store";
+
+
+
+const App: React.FC = () => {
+
     return (
-        <div>
-
-        </div>
+        <Provider store={store}>
+            <AppRouter/>
+        </Provider>
     );
 };
 
-export default App ;
+export default App;
