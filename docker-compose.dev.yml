@@ -1,0 +1,10 @@
+version: "1"
+services:
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client/src:/app/client/src
+    container_name: Decent-client-dev
+    command: ["npm", "run", "dev"]
