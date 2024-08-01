@@ -3,13 +3,20 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
 import Loader from "../components/UI/Loader/Loader.tsx";
 import Pagination from "../components/UI/pagination/Pagination.tsx";
+import MyInput from "../components/UI/inputAuth/myInput.tsx";
+import {CommonNameCountries} from "../types/countriesData/countriesData.ts";
+import {useFilterCountries} from "../hooks/useFilterCountries.ts";
 
 
 const Countries: React.FC = () => {
     const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
+    const [filter, setFilter] = useState('');
+    const [countries, setCountries] = useState<CommonNameCountries[]>([]);
     const limit: number = 10;
     const [startIndex, setStartIndex] = useState<number>(0)
+
+    const sortedSearchedCountries = useFilterCountries(countries, filter);
 
     const {data, error: countriesError, loading: isCountriesLoading} = useTypedSelector(state => state.countries)
     const {getCountriesAction, defCountries} = useActions()
@@ -23,12 +30,16 @@ const Countries: React.FC = () => {
     }, []);
 
     useEffect((): void => {
-        setTotalPages(Math.ceil(data.countries.length / limit));
-    }, [data, limit]);
+        setTotalPages(Math.ceil(sortedSearchedCountries.length / limit));
+    }, [sortedSearchedCountries, limit]);
 
     useEffect(() => {
         setStartIndex((page - 1) * limit);
     }, [page])
+
+    useEffect(() => {
+        setCountries(data.countries)
+    }, [data.countries])
 
     useEffect(() => {
         return () => {
@@ -47,8 +58,13 @@ const Countries: React.FC = () => {
                     <>
                         <h1>Countries</h1>
                         {countriesError && <h1>{countriesError}</h1>}
+                        <MyInput
+                            value={filter}
+                            onChange={e => setFilter(e.target.value)}
+                            placeholder="Поиск..."
+                        />
                         <ul>
-                            {data.countries && data.countries.slice(startIndex, startIndex + limit).map((country, index) => (
+                            {sortedSearchedCountries && sortedSearchedCountries.slice(startIndex, startIndex + limit).map((country, index) => (
                                 <li key={index}>{country.name.common}</li>
                             ))}
                         </ul>

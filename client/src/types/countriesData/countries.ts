@@ -1,9 +1,7 @@
 import {CountriesData} from "./countriesData.ts";
 
 export interface CountriesState {
-    data: {
-        countries: CountriesData[]
-    };
+    data: CountriesData;
     loading: boolean;
     error: string | null;
 }
