@@ -6,7 +6,7 @@ export const getCountriesAction = () => {
     return async (dispatch: Dispatch<CountriesAction>) => {
         try {
             dispatch({type: CountriesActionTypes.GET_COUNTRIES})
-            const response = await CountriesDataService.getCountriesByPagination ();
+            const response = await CountriesDataService.getCountries();
             dispatch({type: CountriesActionTypes.GET_COUNTRIES_SUCCESS, payload: response.data})
         } catch (e) {
             if (e instanceof Error) {

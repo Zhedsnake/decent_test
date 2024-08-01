@@ -22,7 +22,13 @@ export const countriesReducer = (state = initialState, action: CountriesAction):
                 loading: true,
                 error: null,
                 data: {
-                    countries: []
+                    countries: [
+                        {
+                            name: {
+                                common: ''
+                            }
+                        }
+                    ]
                 },
             };
         case CountriesActionTypes.GET_COUNTRIES_SUCCESS:
@@ -32,7 +38,13 @@ export const countriesReducer = (state = initialState, action: CountriesAction):
                 loading: false,
                 error: action.payload,
                 data: {
-                    countries: []
+                    countries: [
+                        {
+                            name: {
+                                common: ''
+                            }
+                        }
+                    ]
                 },
             };
         case CountriesActionTypes.DEF_COUNTRIES:

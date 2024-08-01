@@ -6,6 +6,7 @@ import Pagination from "../components/UI/pagination/Pagination.tsx";
 import MyInput from "../components/UI/inputAuth/myInput.tsx";
 import {CommonNameCountries} from "../types/countriesData/countriesData.ts";
 import {useFilterCountries} from "../hooks/useFilterCountries.ts";
+import {Link} from "react-router-dom";
 
 
 const Countries: React.FC = () => {
@@ -57,15 +58,18 @@ const Countries: React.FC = () => {
                 :
                     <>
                         <h1>Countries</h1>
-                        {countriesError && <h1>{countriesError}</h1>}
+                        {countriesError && <h2>{countriesError}</h2>}
                         <MyInput
                             value={filter}
                             onChange={e => setFilter(e.target.value)}
                             placeholder="Поиск..."
                         />
                         <ul>
+                            {sortedSearchedCountries.length === 0 && <h2>Нет такой страны</h2>}
                             {sortedSearchedCountries && sortedSearchedCountries.slice(startIndex, startIndex + limit).map((country, index) => (
-                                <li key={index}>{country.name.common}</li>
+                                <Link key={index} to={`/country/${country.name.common}`}>
+                                    <li>{country.name.common}</li>
+                                </Link>
                             ))}
                         </ul>
                         <Pagination

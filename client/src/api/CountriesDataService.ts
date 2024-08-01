@@ -3,7 +3,7 @@ import {API_URL} from './config';
 
 
 export default class CountriesDataService {
-    static async getCountriesByPagination(name = "name") {
+    static async getCountries(name = "name") {
         const response = await axios.get(`${API_URL}/all`, {
             params: {
                 fields: name,
@@ -12,8 +12,8 @@ export default class CountriesDataService {
         return response;
     }
 
-    // static async getStaffById(stuffId: string) {
-    //     const response = await axios.get(`${API_URL}/api/users/${stuffId}`);
-    //     return response.data;
-    // }
+    static async getCountryByName(countryId: string) {
+        const response = await axios.get(`${API_URL}/name/${countryId}?fields=capital&fields=name&fields=flag`);
+        return response;
+    }
 }
