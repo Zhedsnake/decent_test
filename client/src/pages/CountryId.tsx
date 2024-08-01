@@ -4,50 +4,91 @@ import Loader from "../components/UI/Loader/Loader";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
 import {OneCountryData} from "../types/countriesData/oneCountryData.ts";
+import BackButton from "../components/UI/backButton/BackButton.tsx";
 
 
 const CountryId: React.FC = () => {
-  const { countryId } = useParams<{ countryId: string }>();
-  const [country, setCountry] = useState<OneCountryData>();
+    const {countryId} = useParams<{ countryId: string }>();
+    const [country, setCountry] = useState<OneCountryData>();
 
-  const {country: countryData, error: countryError, loading: isCountryLoading} = useTypedSelector(state => state.oneCountry)
-  const {getOneCountryAction, defOneCountry} = useActions()
+    const {
+        country: countryData,
+        error: countryError,
+        loading: isCountryLoading
+    } = useTypedSelector(state => state.oneCountry)
+    const {getOneCountryAction, defOneCountry} = useActions()
 
 
-  useEffect((): void => {
-    if (Array.isArray(countryData)) {
-      setCountry(countryData[0]);
-    }
-  }, [countryData]);
+    useEffect((): void => {
+        if (Array.isArray(countryData)) {
+            setCountry(countryData[0]);
+        }
+    }, [countryData]);
 
-  useEffect(() => {
-    if (countryId) {
-      getOneCountryAction(countryId);
-    }
-  }, []);
+    useEffect(() => {
+        if (countryId) {
+            getOneCountryAction(countryId);
+        }
+    }, []);
 
-  useEffect(() => {
-    return () => {
-        defOneCountry()
-    };
-  }, []);
+    useEffect(() => {
+        return () => {
+            defOneCountry()
+        };
+    }, []);
 
-  return (<div className="user-detail">
-        {countryError && <h1>{countryError}</h1> }
-        {isCountryLoading ? (
-            <Loader />
-        ) : (
-            country && (
-                <main className="user-detail__main">
-                  <h1>{country.name.common}</h1>
-                  <p><strong>Official Name:</strong> {country.name.official}</p>
-                  <p><strong>Capital:</strong> {country.capital.join(', ')}</p>
-                  <p><strong>Flag:</strong> {country.flag}</p>
-                </main>
-            )
-        )}
-      </div>
-  );
+    return (
+        <main className="container" style={{marginTop: "50px", marginBottom: "30px"}}>
+            {countryError &&
+                <header className="row text-bg-danger py-2 py-md-3">
+                    <div className="col-9">
+                        <h1 style={{textAlign: "center"}}>{countryError}</h1>
+                    </div>
+                    <div className="col-3">
+                        <BackButton/>
+                    </div>
+                </header>
+            }
+            {isCountryLoading ? (
+                <Loader/>
+            ) : (
+                country && (
+                    <>
+                        <header className="row text-bg-primary py-2 py-md-3">
+                            <div className="col-9">
+                                <h1 style={{textAlign: "center"}}>Страна: {country.name.common}</h1>
+                            </div>
+                            <div className="col-3">
+                                <BackButton/>
+                            </div>
+                        </header>
+                        <section>
+                            <div className="container mt-3">
+                                <div className="row">
+                                    <div className="col-12">
+                                        <ul className="list-group list-group-flush">
+                                            <li className="list-group-item">
+                                                <p style={{marginBottom: 0}}><strong>Official
+                                                    Name:</strong> {country.name.official}</p>
+                                            </li>
+                                            <li className="list-group-item">
+                                                <p style={{marginBottom: 0}}><strong>Capital:</strong> King Edward Point
+                                                </p> {country.capital.join(', ')}
+                                            </li>
+                                            <li className="list-group-item">
+                                                <p style={{marginBottom: 0}}><strong>Flag:</strong> {country.flag}
+                                                </p>Morbi leo risus
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </>
+                )
+            )}
+        </main>
+    );
 };
 
 export default CountryId;
