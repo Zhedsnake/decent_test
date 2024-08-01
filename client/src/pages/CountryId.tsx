@@ -9,8 +9,6 @@ import {OneCountryData} from "../types/countriesData/oneCountryData.ts";
 const CountryId: React.FC = () => {
   const { countryId } = useParams<{ countryId: string }>();
   const [country, setCountry] = useState<OneCountryData>();
-  console.log(country);
-
 
   const {country: countryData, error: countryError, loading: isCountryLoading} = useTypedSelector(state => state.oneCountry)
   const {getOneCountryAction, defOneCountry} = useActions()
