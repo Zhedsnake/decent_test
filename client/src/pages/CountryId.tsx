@@ -18,7 +18,6 @@ const CountryId: React.FC = () => {
 
   useEffect((): void => {
     if (Array.isArray(countryData)) {
-      console.log(countryData[0]);
       setCountry(countryData[0]);
     }
   }, [countryData]);

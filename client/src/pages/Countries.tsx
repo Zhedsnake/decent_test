@@ -57,7 +57,7 @@ const Countries: React.FC = () => {
                     <Loader/>
                 :
                     <>
-                        <h1>Countries</h1>
+                        <h1>Список стран</h1>
                         {countriesError && <h2>{countriesError}</h2>}
                         <MyInput
                             value={filter}
